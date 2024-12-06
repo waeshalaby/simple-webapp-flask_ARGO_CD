@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: sample-web-flask
+  namespace: flask-app-dev
+  labels:
+    app: sample-web-flask
+    app.kubernetes.io/component: sample-web-flask
+    app.kubernetes.io/instance: sample-web-flask
+    app.kubernetes.io/name: sample-web-flask
+    app.kubernetes.io/part-of: sample-web-flask-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-namespace: flask-app-dev
+    app.openshift.io/runtime-version: 789q12t
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-web-flask
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sample-web-flask
+        deployment: sample-web-flask
+    spec:
+      containers:
+        - name: sample-web-flask
+          image: sample-web-flask
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%

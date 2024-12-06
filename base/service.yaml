@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sample-web-flask
+  labels:
+    app: sample-web-flask
+    app.kubernetes.io/component: sample-web-flask
+    app.kubernetes.io/instance: sample-web-flask
+    app.kubernetes.io/name: sample-web-flask
+    app.kubernetes.io/part-of: sample-web-flask-app
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  selector:
+    app: sample-web-flask
+    deployment: sample-web-flask
+

@@ -1,0 +1,21 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: sample-web-flask
+  labels:
+    app: sample-web-flask
+    app.kubernetes.io/component: sample-web-flask
+    app.kubernetes.io/instance: sample-web-flask
+    app.kubernetes.io/name: sample-web-flask
+    app.kubernetes.io/part-of: sample-web-flask-app
+spec:
+  to:
+    kind: Service
+    name: sample-web-flask
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
