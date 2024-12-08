@@ -5,4 +5,4 @@ resources:
 images:
   - name: sample-web-flask
     newName: image-registry.openshift-image-registry.svc:5000/flask-app-dev/sample-web-flask
-    newTag: bab5a4b
+    newTag: 09rew34
